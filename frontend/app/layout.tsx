@@ -1,0 +1,37 @@
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { AuthProvider } from "@/lib/AuthContext";
+import { Navigation } from "@/components/layout/Navigation";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "AI-Powered HRMS | Recruitment Intelligence",
+  description: "Next-generation HR Management System with AI-powered recruitment intelligence",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning>
+        <AuthProvider>
+          <div className="h-screen bg-gray-50 flex flex-col overflow-hidden">
+            <Navigation />
+          <main className="flex-1 overflow-y-auto">
+              {/* Gutters match Navigation's container so page content lines up with the header */}
+              <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
+                {children}
+              </div>
+            </main>
+          </div>
+        </AuthProvider>
+      </body>
+    </html>
+  );
+}
+
